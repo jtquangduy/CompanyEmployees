@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Entities.Exceptions;
+using Microsoft.AspNetCore.Mvc;
 using Service.Contracts;
 
 namespace CompanyEmployees.Presentation.Controllers
@@ -22,6 +23,9 @@ namespace CompanyEmployees.Presentation.Controllers
         public IActionResult GetCompany(Guid id)
         {
             var company = _service.CompanyService.GetCompany(id, trackChanges: false);
+            if (company is null)
+                throw new CompanyNotFoundException(id);
+
             return Ok(company);
         }
     }
