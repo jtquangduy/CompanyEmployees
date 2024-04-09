@@ -32,3 +32,4 @@ namespace Repository
 
         public void Delete(T entity) => RepositoryContext.Set<T>().Remove(entity);
     }
+}
