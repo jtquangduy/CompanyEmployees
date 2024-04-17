@@ -4,6 +4,7 @@ using Entities.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 using Service.Contracts;
 using Shared.DataTransferObjects;
+using Shared.RequestFeatures;
 
 namespace CompanyEmployees.Presentation.Controllers
 {
@@ -16,7 +17,7 @@ namespace CompanyEmployees.Presentation.Controllers
         public CompaniesController(IServiceManager service) => _service = service;
 
         [HttpGet]
-        public async Task<IActionResult> GetCompanies()
+        public async Task<IActionResult> GetCompanies(, [FromQuery] CompanyParameters companyParameters)
         {
             var companies = await _service.CompanyService.GetAllCompaniesAsync(trackChanges: false);
             return Ok(companies);
